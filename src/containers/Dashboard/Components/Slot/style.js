@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { fontSizes } from '../../../../utils/fontSizes';
 
 export const Container = styled.div`
     display: flex;
@@ -9,5 +10,5 @@ export const Container = styled.div`
 
 export const NumWrapper = styled.div`
     margin: 30px;
-    font-size: 55px;
+    font-size: ${fontSizes.slotSize};
 `;

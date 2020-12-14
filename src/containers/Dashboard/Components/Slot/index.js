@@ -23,6 +23,8 @@ const Slot = props => {
             return <div> 🍒 </div> 
         } else if (n === 7) {
             return <div> 💰 </div> 
+        } else {
+            return <div> ➖ </div>
         }
     };
 
