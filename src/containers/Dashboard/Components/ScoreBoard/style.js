@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { fontFamily } from '../../../../utils/fontFamily';
 import { fontSizes } from '../../../../utils/fontSizes';
+import { colors } from "../../../../utils/colors";
 
 export const Container = styled.div`
     display: flex;

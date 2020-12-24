@@ -16,7 +16,7 @@ export const Button = styled.button`
     width: 15vw;
     height: 3vh;
     color: ${colors.white};
-    background-color: ${colors.green};
+    background-color: ${props => props.credit >= 20 ? colors.green : colors.orange};
 `;
 
 export const ButtonWrapper = styled.div`
