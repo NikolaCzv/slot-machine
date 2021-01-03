@@ -7,12 +7,11 @@ import {
 import Slot from './Components/Slot';
 import ScoreBoard from "./Components/ScoreBoard";
 import Message from "./Components/Message";
+import Rules from "./Components/Rules";
 
 //next steps
-//credit limit
 //add bet options
-//points help screen
-//what if game over
+//checkout button
 
 const getRandomNumber = () => Math.floor(Math.random() * 7 + 1);
 
@@ -23,6 +22,7 @@ const Dashboard = () => {
     const [num3, setNum3] = useState(null);
     const [credit, setCredit] = useState(200);
     const [earnedCredit, setEarnedCredit] = useState(0);
+    // const [bet, setBet] = useState(10);
 
     useEffect(() => {
         if (num1 === 1 && num2 === 1 && num3 === 1) {
@@ -120,17 +120,20 @@ const Dashboard = () => {
         setNum3(getRandomNumber());
     };
 
+    const handleRestart = () => window.location.reload();
+
     return  <Container>
+                <Rules />
                 <Message earnedCredit={earnedCredit} credit={credit} />
-                <ScoreBoard credit={credit} earnedCredit={earnedCredit}/>
                 <Slot num1={num1} num2={num2} num3={num3} />
+                <ScoreBoard credit={credit} earnedCredit={earnedCredit}/>
                 <ButtonWrapper>
                     {credit >= 20 ?
                         <Button onClick={handlePlay} credit={credit}>
                             Play
                         </Button>
                         :
-                        <Button>
+                        <Button onClick={handleRestart}>
                             Restart
                         </Button>
                     }

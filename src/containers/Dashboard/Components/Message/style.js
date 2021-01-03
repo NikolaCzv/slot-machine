@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { keyframes } from 'styled-components';
 import { colors } from "../../../../utils/colors";
+import { fontFamily } from "../../../../utils/fontFamily";
 
 const animation = keyframes`
     0% { opacity: 0.3; }
@@ -21,6 +22,8 @@ export const MainTitle = styled.h1`
     animation-name: ${animation};
     animation-duration: 4s;
     animation-iteration-count: infinite;
+    margin: 20px;
+    font-family: ${fontFamily.main};
 `; 
 
 export const WinTitle = styled.h1`
@@ -28,6 +31,8 @@ export const WinTitle = styled.h1`
     animation-name: ${winAnimation};
     animation-duration: 4s;
     animation-iteration-count: infinite;
+    margin: 20px;
+    font-family: ${fontFamily.main};
 `;
 
 export const LoseTitle = styled.h1`
@@ -35,4 +40,6 @@ export const LoseTitle = styled.h1`
     animation-name: ${animation};
     animation-duration: 4s;
     animation-iteration-count: infinite;
+    margin: 20px;
+    font-family: ${fontFamily.main};
 `;

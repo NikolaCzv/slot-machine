@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { fontFamily } from '../../../../utils/fontFamily';
 import { fontSizes } from '../../../../utils/fontSizes';
-import { colors } from "../../../../utils/colors";
 
 export const Container = styled.div`
     display: flex;
@@ -9,7 +8,6 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 30vw;
-    margin: 20px;
 `;
 
 export const CreditDisplay = styled.div`
