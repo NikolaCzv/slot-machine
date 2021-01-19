@@ -8,6 +8,7 @@ import Slot from './Components/Slot';
 import ScoreBoard from "./Components/ScoreBoard";
 import Message from "./Components/Message";
 import Rules from "./Components/Rules";
+import loading from '../../assets/loading.gif'
 
 //next steps
 //add bet options
@@ -22,13 +23,13 @@ const Dashboard = () => {
     const [num3, setNum3] = useState(null);
     const [credit, setCredit] = useState(200);
     const [earnedCredit, setEarnedCredit] = useState(0);
+    const [renderNums, setRenderNums] = useState(false)
     // const [bet, setBet] = useState(10);
 
     useEffect(() => {
         if (num1 === 1 && num2 === 1 && num3 === 1) {
             setEarnedCredit(20);
             setCredit(credit + 20);
-
         } else if (num1 === 2 && num2 === 2 && num3 === 2){
             setEarnedCredit(20);
             setCredit(credit + 20);
@@ -115,9 +116,13 @@ const Dashboard = () => {
 
     const handlePlay = () => {
         setCredit(credit - 20);
-        setNum1(getRandomNumber());
-        setNum2(getRandomNumber());
-        setNum3(getRandomNumber());
+        setRenderNums(false);
+        setTimeout(() => {
+            setNum1(getRandomNumber());
+            setNum2(getRandomNumber());
+            setNum3(getRandomNumber());
+            setRenderNums(true);
+        }, 1000);
     };
 
     const handleRestart = () => window.location.reload();
@@ -125,7 +130,11 @@ const Dashboard = () => {
     return  <Container>
                 <Rules />
                 <Message earnedCredit={earnedCredit} credit={credit} />
-                <Slot num1={num1} num2={num2} num3={num3} />
+                {renderNums ? 
+                    <Slot num1={num1} num2={num2} num3={num3} />
+                :
+                    <img src={loading} />
+                }
                 <ScoreBoard credit={credit} earnedCredit={earnedCredit}/>
                 <ButtonWrapper>
                     {credit >= 20 ?
