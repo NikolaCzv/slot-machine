@@ -8,7 +8,7 @@ import Slot from './Components/Slot';
 import ScoreBoard from "./Components/ScoreBoard";
 import Message from "./Components/Message";
 import Rules from "./Components/Rules";
-import loading from '../../assets/loading.gif'
+import loadingSign from '../../assets/loading.gif';
 
 //next steps
 //add bet options
@@ -23,13 +23,15 @@ const Dashboard = () => {
     const [num3, setNum3] = useState(null);
     const [credit, setCredit] = useState(200);
     const [earnedCredit, setEarnedCredit] = useState(0);
-    const [renderNums, setRenderNums] = useState(false)
+    const [loading, setLoading] = useState(true);
+    const [isStarted, setIsStarted] = useState(false);
     // const [bet, setBet] = useState(10);
 
     useEffect(() => {
         if (num1 === 1 && num2 === 1 && num3 === 1) {
             setEarnedCredit(20);
             setCredit(credit + 20);
+            
         } else if (num1 === 2 && num2 === 2 && num3 === 2){
             setEarnedCredit(20);
             setCredit(credit + 20);
@@ -109,19 +111,25 @@ const Dashboard = () => {
         } else if (num2 === 7 && num3 === 7) {
             setEarnedCredit(60);
             setCredit(credit + 60);
+
         } else {
             setEarnedCredit(0);
         }
-    },[num1, num2, num3]); //samo kad se neki od brojeva promeni
+    },[num1, num2, num3]);
 
     const handlePlay = () => {
         setCredit(credit - 20);
-        setRenderNums(false);
+        setEarnedCredit(0);
+        setNum1(getRandomNumber());
+        setNum2(getRandomNumber());
+        setNum3(getRandomNumber());
+        
+        setLoading(true);
+        setIsStarted(true);
+
         setTimeout(() => {
-            setNum1(getRandomNumber());
-            setNum2(getRandomNumber());
-            setNum3(getRandomNumber());
-            setRenderNums(true);
+            setLoading(false);
+            setIsStarted(false);
         }, 1000);
     };
 
@@ -129,16 +137,16 @@ const Dashboard = () => {
 
     return  <Container>
                 <Rules />
-                <Message earnedCredit={earnedCredit} credit={credit} />
-                {renderNums ? 
+                <Message earnedCredit={earnedCredit} credit={credit} loading={loading}/>
+                {loading ? 
+                    <img src={loadingSign} />
+                    :
                     <Slot num1={num1} num2={num2} num3={num3} />
-                :
-                    <img src={loading} />
                 }
-                <ScoreBoard credit={credit} earnedCredit={earnedCredit}/>
+                <ScoreBoard credit={credit} earnedCredit={earnedCredit} loading={loading}/>
                 <ButtonWrapper>
                     {credit >= 20 ?
-                        <Button onClick={handlePlay} credit={credit}>
+                        <Button onClick={handlePlay} credit={credit} disabled={isStarted}>
                             Play
                         </Button>
                         :

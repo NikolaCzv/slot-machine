@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     Container,
     CreditDisplay,
@@ -6,14 +6,15 @@ import {
 } from './style';
 
 const ScoreBoard = props => {
-    const { credit, earnedCredit } = props;
+    const { credit, earnedCredit, loading } = props;
 
     return  <Container>
                 <CreditDisplay>
                     Credit: {credit}
                 </CreditDisplay>
+                
                 <EarnedCredit earnedCredit={earnedCredit}>
-                    Win: {earnedCredit}
+                    Win: {loading ? 0 : earnedCredit}
                 </EarnedCredit>
             </Container>
 };
